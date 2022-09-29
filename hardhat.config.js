@@ -23,7 +23,7 @@ module.exports = {
       chainId: 5,
       url: process.env.GOEL_URL,
       accounts: [PRIVATE_KEY],
-      blockConfirmations: 6,
+      blockConfirmations: 5,
     },
   },
   etherscan: {

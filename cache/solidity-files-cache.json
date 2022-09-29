@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\Administrator\\Desktop\\NUM\\contracts\\NumberGuessingGame.sol": {
-      "lastModificationDate": 1664316050736,
-      "contentHash": "9c28d83b9b8af380afab2220e14b1500",
+      "lastModificationDate": 1664368990549,
+      "contentHash": "02abfcbb574130d5144d2643f3a60454",
       "sourceName": "contracts/NumberGuessingGame.sol",
       "solcConfig": {
         "version": "0.8.9",

@@ -6,8 +6,7 @@ const FRONT_END_ABI_FILE = "./constant/abi.json";
 module.exports = async function () {
   if (process.env.UPDATEFRONTEND) {
     console.log("Updating FrontEnd");
-    // updateContractAddress();
-   // updateAbi();
+ 
   }
   async function updateAbi() {
     const raffle = await ethers.getContract("NumberGuessingGame");
