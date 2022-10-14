@@ -3,7 +3,9 @@
 // module.exports = async ({ getNamedAccounts, deployments }) => {
 //   const { deploy, log } = deployments;
 //   const { deployer } = await getNamedAccounts();
- 
+
+const { ethers } = require("hardhat");
+
 //     log("Deploying......");
 //     await deploy("NumberGuessingGame", {
 //       from: deployer,
@@ -13,7 +15,14 @@
 //     });
 //   //  console.log(res)
 //     log("---------------------------------");
-  
+
 // };
 
 // module.exports.tags = ["all", "mock"];
+
+module.exports = async ({ getNamedAccounts, deployments }) => {
+  const { deploy, log } = deployments;
+  const { deployer } = await getNamedAccounts();
+  log('Deploying Smart Contract...........')
+  await deploy('VotingPowe')
+}

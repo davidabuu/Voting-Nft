@@ -16,6 +16,7 @@ contract VotingNft {
         uint256 s_voteCount;
         string s_role;
     }
+     mapping (uint256 => Candidates) public users;
     //Modifier
     modifier onlyManager{
         require(msg.sender == manager);
@@ -23,11 +24,12 @@ contract VotingNft {
     }
     //Store the candidates in an array
     Candidates [] public candidates;
-    function addCandidates(string memory fullName, string memory department, string memory matricNumber, string memory image, uint256 voteCount, string memory role ) private onlyManager{
+    Candidates can;
+    function addCandidates(string memory fullName, string memory department, string memory matricNumber, string memory image, uint256 voteCount, string memory role ) public onlyManager{
         Candidates memory newCandidate = Candidates(fullName, department, matricNumber, image, voteCount, role);
         candidates.push(newCandidate);
     }
-    //Vote for a praticular candidate
+    //Vote for a particular candidate
     function vote(uint256 index) public {
         if(voted[msg.sender]){
             revert VotingNft__YouHaveVotedAlready();
@@ -37,15 +39,10 @@ contract VotingNft {
         }
        
     }
-    //Pick Winner
-    function winner () public view onlyManager returns(string memory, string memory, string memory, string memory, uint256, string memory) {
-        uint256 largestCount = 0;
-        uint256 num;
-        for(num = 0 ; num < candidates.length; num++){
-            if(candidates[num].s_voteCount > largestCount){
-                largestCount = candidates[num].s_voteCount;
-            }
-        }
-        return (candidates[num].s_fullName, candidates[num].s_department, candidates[num].s_matricNumber, candidates[num].image, candidates[num].s_voteCount, candidates[num].s_role);
+
+    //Get All Candidates
+    function getAllCandidate() public view returns (Candidates[] memory) {
+        return candidates;
     }
+    
 }
