@@ -5,8 +5,16 @@ error VotingNft__YouHaveVotedAlready();
 contract VotingNft {
     address private manager;
     mapping(address => bool) voted;
+    //Determine the voting App State
+     enum VotingState {
+    OPEN,
+    CLOSED
+  }
+  VotingState private s_votingState;
+     
     constructor(){
         manager = msg.sender;
+        s_votingState = VotingState.OPEN;
     }
     struct Candidates{
         string s_fullName;
@@ -22,14 +30,16 @@ contract VotingNft {
         require(msg.sender == manager);
         _;
     }
-    //Store the candidates in an array
+//Store the candidates in an array
     Candidates [] public candidates;
+    Candidates can;
     function addCandidates(string memory fullName, string memory department, string memory matricNumber, string memory image, uint256 voteCount, string memory role ) public onlyManager{
         Candidates memory newCandidate = Candidates(fullName, department, matricNumber, image, voteCount, role);
         candidates.push(newCandidate);
     }
     //Vote for a particular candidate
     function vote(uint256 index) public {
+        require(s_votingState == VotingState.CLOSED, "Voting is Over");
         if(voted[msg.sender]){
             revert VotingNft__YouHaveVotedAlready();
         }else{
@@ -42,6 +52,10 @@ contract VotingNft {
     //Get All Candidates
     function getAllCandidate() public view returns (Candidates[] memory) {
         return candidates;
+    }
+    //Stop Voting
+    function stopVoting () onlyManager public {
+        s_votingState = VotingState.CLOSED;
     }
     
 }
