@@ -24,7 +24,6 @@ contract VotingNft {
     }
     //Store the candidates in an array
     Candidates [] public candidates;
-    Candidates can;
     function addCandidates(string memory fullName, string memory department, string memory matricNumber, string memory image, uint256 voteCount, string memory role ) public onlyManager{
         Candidates memory newCandidate = Candidates(fullName, department, matricNumber, image, voteCount, role);
         candidates.push(newCandidate);
