@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/VotingNft.sol": {
+      "content": "// SPDX-License-Identifier: GPL-3.0\r\npragma solidity ^0.8.7;\r\n\r\nerror VotingNft__YouHaveVotedAlready();\r\ncontract VotingNft {\r\n    address private manager;\r\n    mapping(address => bool) voted;\r\n    //Determine the voting App State\r\n     enum VotingState {\r\n    OPEN,\r\n    CLOSED\r\n  }\r\n  VotingState private s_votingState;\r\n     \r\n    constructor(){\r\n        manager = msg.sender;\r\n        s_votingState = VotingState.OPEN;\r\n    }\r\n    struct Candidates{\r\n        string s_fullName;\r\n        string s_department;\r\n        string s_matricNumber;\r\n        string image;\r\n        uint256 s_voteCount;\r\n        string s_role;\r\n    }\r\n     mapping (uint256 => Candidates) public users;\r\n    //Modifier\r\n    modifier onlyManager{\r\n        require(msg.sender == manager);\r\n        _;\r\n    }\r\n//Store the candidates in an array\r\n    Candidates [] public candidates;\r\n    Candidates can;\r\n    function addCandidates(string memory fullName, string memory department, string memory matricNumber, string memory image, uint256 voteCount, string memory role ) public onlyManager{\r\n        Candidates memory newCandidate = Candidates(fullName, department, matricNumber, image, voteCount, role);\r\n        candidates.push(newCandidate);\r\n    }\r\n    //Vote for a particular candidate\r\n    function vote(uint256 index) public {\r\n        require(s_votingState == VotingState.CLOSED, \"Voting is Over\");\r\n        if(voted[msg.sender]){\r\n            revert VotingNft__YouHaveVotedAlready();\r\n        }else{\r\n         candidates[index].s_voteCount +=1;\r\n        voted[msg.sender] = true;\r\n        }\r\n       \r\n    }\r\n\r\n    //Get All Candidates\r\n    function getAllCandidate() public view returns (Candidates[] memory) {\r\n        return candidates;\r\n    }\r\n    //Stop Voting\r\n    function stopVoting () onlyManager public {\r\n        s_votingState = VotingState.CLOSED;\r\n    }\r\n    \r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

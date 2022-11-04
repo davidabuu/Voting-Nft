@@ -477,10 +477,10 @@
         "OwnableInterface"
       ]
     },
-    "C:\\Users\\Administrator\\Desktop\\NUM\\contracts\\VotingNft.sol": {
-      "lastModificationDate": 1665307615302,
-      "contentHash": "f51fed530137c6dc019a63796db63f5c",
-      "sourceName": "contracts/VotingNft.sol",
+    "C:\\Users\\Administrator\\Desktop\\NUM\\contracts\\VotingContract.sol": {
+      "lastModificationDate": 1667527463363,
+      "contentHash": "a3d72a38b7f95b318c1470e0a2699e4f",
+      "sourceName": "contracts/VotingContract.sol",
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
@@ -516,7 +516,7 @@
         "^0.8.7"
       ],
       "artifacts": [
-        "VotingNft"
+        "VotingContract"
       ]
     }
   }

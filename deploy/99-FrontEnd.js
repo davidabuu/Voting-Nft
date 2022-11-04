@@ -9,7 +9,7 @@ module.exports = async function () {
  
   }
   async function updateAbi() {
-    const raffle = await ethers.getContract("NumberGuessingGame");
+    const raffle = await ethers.getContract("VotingContract");
     fs.writeFileSync(
   
       FRONT_END_ABI_FILE,
